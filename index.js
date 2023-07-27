@@ -164,8 +164,14 @@ console.log(
 	Örnek: AnahtardanDegerlendirmeAl(degerlendirmeler,0) şunu döndürmeli: "Nalan isimli kişi 5 puan verdi ve şunları yazdı: Mükemmel atmosfer ve mükemmel vegan seçenekleri!"
 */
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-  /*Kodlar buraya*/
+function AnahtardanDegerlendirmeAl(key, index) {
+  let anahtarDegerlendirme =
+    key[index]["isim"] +
+    " isimli kişi " +
+    key[index]["puan"] +
+    " puan verdi ve şunları yazdı: " +
+    key[index]["geribildirim"];
+  return anahtarDegerlendirme;
 }
 
 /*  Görev 7:  
@@ -180,8 +186,14 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 	Not: Eğer 4. görevi başarıyla yaptıysanız kişinin geribildirimi boş görünmemeli
 */
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-  /*Kodlar buraya*/
+function SonDegerlendirmeyiAl(degerlendirmeler) {
+  let sonDegerlendirme =
+    degerlendirmeler[degerlendirmeler.length - 1]["isim"] +
+    " isimli kişi " +
+    degerlendirmeler[degerlendirmeler.length - 1]["puan"] +
+    " puan verdi ve şunları yazdı: " +
+    degerlendirmeler[degerlendirmeler.length - 1]["geribildirim"];
+  return sonDegerlendirme;
 }
 
 /////////////// BONUS  GÖRVLER////////////////////
@@ -200,9 +212,16 @@ function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
 	]
 */
 
-function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
-  /* Kodlar buraya */
+function PuanaGoreDegerlendirmeAl(degerlendirmeler, puan) {
+  const puanDegerlendirme = [];
+  for (let key in degerlendirmeler) {
+    if (Math.floor(degerlendirmeler[key]["puan"]) == puan) {
+      puanDegerlendirme.push(degerlendirmeler[key]);
+    }
+  }
+  return puanDegerlendirme;
 }
+console.log(PuanaGoreDegerlendirmeAl(degerlendirmeler, 4));
 
 /*  BONUS 2:    
 	UzunDegerlendirmeleriAl fonksiyonuna aşağıdakileri uygulayın:
@@ -211,9 +230,16 @@ function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
 	
 */
 
-function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
-  /* Kodlar buraya */
+function UzunDegerlendirmeleriAl(degerlendirmeler) {
+  const uzunDegerlendirme = [];
+  for (let key in degerlendirmeler) {
+    if (degerlendirmeler[key]["geribildirim"].split(" ").length > 15) {
+      uzunDegerlendirme.push(degerlendirmeler[key]);
+    }
+  }
+  return uzunDegerlendirme;
 }
+console.log(UzunDegerlendirmeleriAl(degerlendirmeler));
 
 /*  BONUS 3:  
 	Bu ek görevde degerlendirmeler dizisi kullanılmayacak!  Bu görevde kendi nesnenizi yaratmanız gerekmektedir.
@@ -231,10 +257,20 @@ function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
 	Şu şekilde metotu çağıralım araba1.surus(100)
 	Bu 110 döndürmelidir çünkü başlangıç kilometre sayacını 10 olarak tanımladık ve 100 km arabayı sürdük.
 */
+const araba = {};
 
-function arabaYapici(/* Kodlar buraya */) {
-  /* Kodlar buraya */
+function arabaYapici() {
+  (araba.arabaMarkasi = "BMW"),
+    (araba.arabaModeli = "X5"),
+    (araba.arabaYili = 2019),
+    (araba.kilometreSayaci = 10),
+    (araba.surus = function (mesafe) {
+      this.kilometreSayaci += mesafe;
+    });
 }
+arabaYapici();
+araba.surus(100);
+console.log(araba.kilometreSayaci);
 
 /*  Buradan aşağıdaki kodları değiştirmeyin lütfen */
 function sa() {
